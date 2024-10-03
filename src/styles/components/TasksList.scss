@@ -39,7 +39,7 @@
 
 .cardTask{
     background-color: white;
-    width: 25vw;
+    width: 20vw;
     
     
     display: flex;
@@ -66,6 +66,16 @@
     }
 }
 
+.task-controls{
+    display: flex;
+    margin: 0 .5rem 0 .5rem;
+    align-items: center;
+
+    button{
+        padding: 0;
+        margin: 0;
+    }
+}
 
 
 
@@ -75,5 +85,12 @@
         padding: .5rem;
         border-radius: .5rem;
     }
+    
 }
 
+
+
+.scrollable-container{
+  overflow-y: auto; /* Habilita a rolagem vertical */
+  overflow-x: hidden; /* Oculta a rolagem horizontal, se necessário */
+}

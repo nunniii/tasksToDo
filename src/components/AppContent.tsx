@@ -2,10 +2,16 @@ import '../styles/components/AppContent.scss'
 
 // Importar todos os componentes possíveis
 import { Tasks } from './Tasks/Tasks';
-import { Progress } from './Progress';
+import { Progress } from './Progress';777
+0
 import { Rest } from './Rest';
 
-export function AppContent({ selectedComponent }) {
+// Definir o tipo da propriedade
+type AppContentProps = {
+  selectedComponent: 'Tasks' | 'Progress' | 'Rest';
+};
+
+export function AppContent({ selectedComponent }: AppContentProps) {
   const renderComponent = () => {
     switch (selectedComponent) {
       case 'Tasks':
@@ -17,11 +23,11 @@ export function AppContent({ selectedComponent }) {
       default:
         return null;
     }
-  }
+  };
 
   return (
     <main id="AppContent">
       {renderComponent()}
     </main>
-  )
+  );
 }
