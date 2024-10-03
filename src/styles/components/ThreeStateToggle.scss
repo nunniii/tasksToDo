@@ -1,0 +1,36 @@
+
+
+.toggle-container {
+    width: 7rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .2rem;
+    background-color: #f0f0f0;  // Fundo claro para o contêiner
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  // Sombra suave
+    transition: background-color 0.3s ease, transform 0.2s ease; // Transições suaves
+  
+
+  }
+  
+  .toggle-label {
+    font-size: 18px;
+    color: whitesmoke;  // Cor do texto
+    text-transform: capitalize;  // Para deixar as opções "to do", "in progress", "done" com primeira letra maiúscula
+  }
+  
+  .toggle-container.to-do {
+    background-color: #ff0015;  // Cor para "to do"
+  }
+  
+  .toggle-container.in-progress {
+    background-color: #0051ff;  // Cor para "in progress"
+  }
+  
+  .toggle-container.done {
+    background-color: #00ff3c;  // Cor para "done"
+  }
+  

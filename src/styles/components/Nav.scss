@@ -1,0 +1,55 @@
+#Nav {
+    // border-radius: .5rem;
+    // border: 1px solid rgba(black, .1);
+    box-shadow: 0 0 .5rem rgba(black, .1);
+    background: linear-gradient(145deg, white, whitesmoke, white, whitesmoke);
+    top: 0;               /* Alinha no topo */
+    left: 50%;            /* Centraliza horizontalmente com relação à viewport */
+    transform: translateX(-50%); /* Move 50% da largura para a esquerda para centralizar corretamente */
+    width: 100vw;
+    height: 3rem;
+    position: fixed;
+    padding: 0 .3rem 0 .3rem;
+
+
+    display: grid;
+    grid-template-columns: 10fr 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    #Controls{
+        padding: 0;
+
+    }
+
+
+
+
+    .title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h1{
+            color: white;
+            text-align: center;
+            font-size: 14pt;
+        }
+    }
+
+
+
+
+
+    #CurrentTime{
+
+        padding: 0 1rem 0 1rem;
+    
+    
+    }
+
+}
+
+
+
+

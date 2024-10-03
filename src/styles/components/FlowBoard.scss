@@ -1,0 +1,41 @@
+#FlowBoard {
+  width: 60vw;
+  height: calc(100vh - 3rem);
+  background-color: whitesmoke; // Fundo suave
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: .5rem;
+
+  .react-flow {
+      width: 90%;
+      height: 90%;
+      background-color: whitesmoke; // Fundo do Flow
+      border-radius: 12px;
+      box-shadow: 0 2px .5rem rgba(0, 0, 0, 0.2); // Sombra suave
+      padding: 20px;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+          transform: scale(1.02); 
+      }
+
+      .react-flow__node {
+          background-color: #9f08e6; 
+          color: #fff; 
+          border-radius: 8px;
+          padding: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border: 1px solid #fff;
+
+          &-selected {
+              border: 2px solid whitesmoke; // Cor de seleção
+          }
+      }
+
+      .react-flow__edge {
+          stroke: whitesmoke; // Cor das arestas (edges)
+      }
+  }
+}
