@@ -54,11 +54,23 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
     setTasks(newTasks);
   };
 
+
+
+
+
+
+
   const handleToggleChange = (index: number) => {
     const newTasks = [...tasks];
     newTasks[index].state = newTasks[index].state === 'to do' ? 'doing' : newTasks[index].state === 'doing' ? 'done' : 'to do';
     setTasks(newTasks);
   };
+
+
+
+
+
+
 
   return (
     <div id='TasksList'>
@@ -84,7 +96,12 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
                   <p>{task.description}</p>
                 </div>
               </div>
-              <ThreeStateToggle onToggle={() => handleToggleChange(index)} />
+
+              <ThreeStateToggle 
+  initialState={task.state} // Pass the current task state as initialState
+  onToggle={() => handleToggleChange(index)} 
+/>
+
               <div className="task-controls">
                 <button onClick={() => moveUp(index)} disabled={index === 0}>
                   <FaChevronUp />

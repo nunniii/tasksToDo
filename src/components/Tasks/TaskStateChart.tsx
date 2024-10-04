@@ -14,6 +14,8 @@ type TaskStateChartProps = {
 };
 
 export const TaskStateChart: React.FC<TaskStateChartProps> = ({ tasks }) => {
+
+
   // Função para contar os estados
   function countTaskStates(tasks: Task[]) {
     return tasks.reduce(
@@ -31,6 +33,7 @@ export const TaskStateChart: React.FC<TaskStateChartProps> = ({ tasks }) => {
     if (totalTasks === 0) return { 'To Do': 0, 'Doing': 0, 'Done': 0 }; // Para evitar divisão por zero
 
     const taskStateCounts = countTaskStates(tasks);
+    console.log(tasks, taskStateCounts)
 
     return {
       'To Do': taskStateCounts['to do'] * 10 / totalTasks,

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import '../../styles/components/scope/Tasks.scss';
 import { FlowBoard } from './FlowBoard';
 import { TasksList } from './TasksList';
-import { TaskStateChart } from './TaskStateChart';
 
 // Definindo a estrutura da tarefa
 type Task = {
@@ -14,6 +13,8 @@ type Task = {
 };
 
 export function Tasks() {
+
+
   // Estado da lista de tarefas
   const initialTasks: Task[] = [
     { id: 1, name: 'Task One', description: 'Description for Task One', state: 'to do', position: 1 },
@@ -26,27 +27,13 @@ export function Tasks() {
 
   const [tasks, setTasks] = useState(initialTasks);
 
-  // Função para simular mudanças periódicas no estado das tarefas
-  const updateTasksPeriodically = () => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => ({
-        ...task,
-        state:
-          task.state === 'to do'
-            ? 'doing'
-            : task.state === 'doing'
-            ? 'done'
-            : 'to do', // alterna os estados entre to do doing e done
-      }))
-    );
-  };
-
-  // useEffect para atualizar periodicamente as tarefas a cada 5 segundos
+  // useEffect para monitorar alterações na lista de tarefas
   useEffect(() => {
-    const interval = setInterval(updateTasksPeriodically, 5000);
-
-    return () => clearInterval(interval); // Limpa o intervalo quando o componente for desmontado
-  }, []);
+    // Aqui você pode colocar qualquer lógica que precisa acontecer quando as tarefas são atualizadas 
+    console.log('As tarefas foram atualizadas:', tasks);
+    
+    // Exemplo: Se você quiser tomar uma ação específica sempre que a lista for alterada
+  }, [tasks]); // Este useEffect dispara sempre que o array 'tasks' mudar
 
   return (
     <div id="Tasks">
