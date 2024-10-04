@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import { Dialog, DialogPanel, DialogTitle, Description } from '@headlessui/react';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../../styles/components/TasksList.scss';
 import { ThreeStateToggle } from './ThreeStateToggle';
-
 import { TaskStateChart } from './TaskStateChart';
 
-
-// estrutura da tarefa
 type Task = {
   id: number;
   name: string;
   description: string;
   state: 'to do' | 'doing' | 'done';
-  position: number; // Para controlar a ordem
+  position: number;
 };
 
 type TasksListProps = {
@@ -26,13 +22,13 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
-  // abrir o modal
+  // Abrir o modal
   const openModal = (task: Task) => {
     setSelectedTask(task);
     setIsOpen(true);
   };
 
-  // fechar modal
+  // Fechar modal
   const closeModal = () => {
     setIsOpen(false);
     setSelectedTask(null);
@@ -54,59 +50,57 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
     setTasks(newTasks);
   };
 
-
-
-
-
-
-
+  // Função para alternar o estado da tarefa
   const handleToggleChange = (index: number) => {
     const newTasks = [...tasks];
-    newTasks[index].state = newTasks[index].state === 'to do' ? 'doing' : newTasks[index].state === 'doing' ? 'done' : 'to do';
-    setTasks(newTasks);
+    newTasks[index].state =
+      newTasks[index].state === 'to do'
+        ? 'doing'
+        : newTasks[index].state === 'doing'
+        ? 'done'
+        : 'to do';
+
+    setTasks(newTasks); // Isso garantirá que FlowBoard também seja re-renderizado
   };
-
-
-
-
-
-
 
   return (
     <div id='TasksList'>
       <div className='controls flex justify-between items-center'>
         <button>+ Nova tarefa</button>
-      <TaskStateChart tasks={tasks} />
-
+        <TaskStateChart tasks={tasks} />
       </div>
       <ul className='scrollable-container'>
         <AnimatePresence>
           {tasks.map((task, index) => (
-            <motion.li 
+            <motion.li
               key={task.id}
               layout
-              initial={{ opacity: 0, y: -20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: 20 }} 
-              transition={{ duration: 0.3, ease: "easeInOut" }} 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              <div className="cardTask" onClick={() => openModal(task)}>
+              <div className='cardTask' onClick={() => openModal(task)}>
                 <div>
                   <h1>{task.name}</h1>
                   <p>{task.description}</p>
                 </div>
               </div>
 
-              <ThreeStateToggle 
-  initialState={task.state} // Pass the current task state as initialState
-  onToggle={() => handleToggleChange(index)} 
-/>
+              {/* Componente de alternância de estado */}
+              <ThreeStateToggle
+                initialState={task.state}
+                onToggle={() => handleToggleChange(index)} // Quando alternar, altera o estado
+              />
 
-              <div className="task-controls">
+              <div className='task-controls'>
                 <button onClick={() => moveUp(index)} disabled={index === 0}>
                   <FaChevronUp />
                 </button>
-                <button onClick={() => moveDown(index)} disabled={index === tasks.length - 1}>
+                <button
+                  onClick={() => moveDown(index)}
+                  disabled={index === tasks.length - 1}
+                >
                   <FaChevronDown />
                 </button>
               </div>
@@ -117,22 +111,9 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
 
       {/* Modal */}
       {selectedTask && (
-        <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
-          <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-            <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
-              <DialogTitle className="font-bold">Configurações da tarefa</DialogTitle>
-              <Description>
-                Esta é a configuração da tarefa <strong>{selectedTask.name}</strong>.
-              </Description>
-              <p>Descrição: {selectedTask.description}</p>
-              <p>Estado: {selectedTask.state}</p>
-              <div className="flex gap-4">
-                <button onClick={closeModal}>Cancelar</button>
-                <button onClick={closeModal}>Salvar</button>
-              </div>
-            </DialogPanel>
-          </div>
-        </Dialog>
+        <div className="modal">
+          {/* Exibir informações da tarefa selecionada */}
+        </div>
       )}
     </div>
   );

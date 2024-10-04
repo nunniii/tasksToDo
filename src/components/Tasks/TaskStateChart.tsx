@@ -36,6 +36,7 @@ export const TaskStateChart: React.FC<TaskStateChartProps> = ({ tasks }) => {
     console.log(tasks, taskStateCounts)
 
     return {
+      // aqui dividi por 10 pois, o width padrão é class 'w-40', equivalente a 10rem.
       'To Do': taskStateCounts['to do'] * 10 / totalTasks,
       'Doing': taskStateCounts['doing'] * 10 / totalTasks,
       'Done': taskStateCounts['done'] * 10 / totalTasks,
@@ -46,9 +47,9 @@ export const TaskStateChart: React.FC<TaskStateChartProps> = ({ tasks }) => {
 
   return (
     <div className="flex w-40">
-      <div className="h-2 bg-red-800" style={{ width: `${percentages['To Do']}rem` }}>f</div>
-      <div className="h-2 bg-blue-800" style={{ width: `${percentages['Doing']}rem` }}>f</div>
-      <div className="h-2 bg-green-800" style={{ width: `${percentages['Done']}rem` }}>f</div>
+      <div className="h-2 bg-red-500" style={{ width: `${percentages['To Do']}rem` }}>f</div>
+      <div className="h-2 bg-blue-500" style={{ width: `${percentages['Doing']}rem` }}>f</div>
+      <div className="h-2 bg-green-500" style={{ width: `${percentages['Done']}rem` }}>f</div>
     </div>
   );
 };
