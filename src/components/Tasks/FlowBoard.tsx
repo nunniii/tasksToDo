@@ -40,16 +40,23 @@ export function FlowBoard({ tasks, setTasks }: FlowBoardProps) {
   }
 
   // Adicionando nós para cada tarefa
+  let n = 0;
   tasks.forEach((task, index) => {
+    // Alterna entre 100 e 10 com base no valor de n
+    const nn = n === 0 ? 200 : 10;
+  
+    // Adiciona o nó à lista
     initialNodes.push({
       id: `${index}`,
       data: { label: task.name },
-      position: { x: 100 + index * 10, y: 100 + 2 * index * 35 },
+      position: { x: nn + index * 10, y: 100 + 2 * index * 35 },
       className: 'light',
       style: { backgroundColor: getColorForTaskState(task.state) },
     });
+  
+    // Alterna o valor de n entre 0 e 1
+    n = 1 - n;
   });
-
   const initialEdges: Edge[] = [];
 
   tasks.forEach((task, index) => {
@@ -58,7 +65,7 @@ export function FlowBoard({ tasks, setTasks }: FlowBoardProps) {
         id: `edge-${index}`,
         source: `${index}`,
         target: `${index + 1}`,
-        animated: true,
+        animated: false,
       });
     }
   });
