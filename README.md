@@ -1,11 +1,14 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![GitHub License](https://img.shields.io/github/license/nunniii/tasksToDo) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-Currently, two official plugins are available:
+# TasksToDo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[TasksToDo](https://nunniii.github.io/tasksToDo/) is an application that allows you to manage your tasks by classifying them into "to do" 📝, "in progress" ⏳, and "done" ✅. The application utilizes several key dependencies to enhance its functionality and user experience. The library @xyflow/react is integrated to provide a dynamic flow board for visual task management, allowing users to quickly see the progress of their tasks. The project is built with React and TypeScript, and for styling, the implementation primarily uses SCSS and Tailwind 🌟.
+
+</br></br>
+
+![image](https://github.com/user-attachments/assets/655e680a-c4a0-4e3b-be63-e192101ba626)
+
 
 ## Expanding the ESLint configuration
 
