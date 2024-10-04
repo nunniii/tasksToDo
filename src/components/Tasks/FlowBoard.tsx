@@ -7,7 +7,7 @@ import {
   useEdgesState,
   Controls,
   Node,
-  Edge,
+  Edge as FlowEdge, // Renomear Edge para FlowEdge para evitar conflitos com o tipo Edge definido
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import '../../styles/components/FlowBoard.scss';
@@ -18,6 +18,11 @@ type Task = {
   description: string;
   state: 'to do' | 'doing' | 'done';
   position: number;
+};
+
+// Renomeando Edge para FlowEdge para evitar confusões
+type Edge = FlowEdge & {
+  animated: boolean; // Definindo como booleano
 };
 
 type FlowBoardProps = {
@@ -42,7 +47,6 @@ export function FlowBoard({ tasks }: FlowBoardProps) {
   // Adicionando nós para cada tarefa
   let n = 0;
   tasks.forEach((task, index) => {
-    // Alterna entre 100 e 10 com base no valor de n
     const nn = n === 0 ? 200 : 10;
   
     // Adiciona o nó à lista
@@ -54,9 +58,9 @@ export function FlowBoard({ tasks }: FlowBoardProps) {
       style: { backgroundColor: getColorForTaskState(task.state) },
     });
   
-    // Alterna o valor de n entre 0 e 1
-    n = 1 - n;
+    n = 1 - n; // Alterna entre 0 e 1
   });
+
   const initialEdges: Edge[] = [];
 
   tasks.forEach((task, index) => {
@@ -65,7 +69,7 @@ export function FlowBoard({ tasks }: FlowBoardProps) {
         id: `edge-${index}`,
         source: `${index}`,
         target: `${index + 1}`,
-        animated: false,
+        animated: task.state === 'doing', // Aqui a comparação direta
       });
     }
     function i(t:any){
@@ -75,13 +79,12 @@ export function FlowBoard({ tasks }: FlowBoardProps) {
   });
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  
   function i(setNodes:any){
     setNodes = setNodes;
     return;
   } i(setNodes);
-
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
     (connection: any) => {
