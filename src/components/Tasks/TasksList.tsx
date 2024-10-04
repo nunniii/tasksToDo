@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
+import { FaChevronUp, FaChevronDown, FaTrash } from 'react-icons/fa'; // Ícone de lixeira
 import { motion, AnimatePresence } from 'framer-motion';
 import '../../styles/components/TasksList.scss';
 import { ThreeStateToggle } from './ThreeStateToggle';
 import { TaskStateChart } from './TaskStateChart';
+
+import '../../styles/components/ModalNewTask.scss'
 
 type Task = {
   id: number;
@@ -19,19 +21,15 @@ type TasksListProps = {
 };
 
 export function TasksList({ tasks, setTasks }: TasksListProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  // Estados para controlar o modal e os inputs
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newTaskName, setNewTaskName] = useState('');
+  const [newTaskDescription, setNewTaskDescription] = useState('');
 
-  // Abrir o modal
-  const openModal = (task: Task) => {
-    setSelectedTask(task);
-    setIsOpen(true);
-  };
-
-  // Fechar modal
-  const closeModal = () => {
-    setIsOpen(false);
-    setSelectedTask(null);
+  // Função para deletar uma tarefa pelo ID
+  const deleteTask = (id: number) => {
+    const filteredTasks = tasks.filter(task => task.id !== id);
+    setTasks(filteredTasks); // Atualiza o array de tarefas
   };
 
   // Função para mover a tarefa para cima
@@ -63,10 +61,40 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
     setTasks(newTasks); // Isso garantirá que FlowBoard também seja re-renderizado
   };
 
+  // Função para abrir/fechar o modal
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setNewTaskName('');
+    setNewTaskDescription('');
+  };
+
+  // Função para adicionar uma nova tarefa
+  const addNewTask = () => {
+    if (newTaskName.trim() === '' || newTaskDescription.trim() === '') return; // Validação simples
+
+    const newTask: Task = {
+      id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1, // Gerar um novo ID
+      name: newTaskName,
+      description: newTaskDescription,
+      state: 'to do', // Tarefa sempre começa com estado "to do"
+      position: 1 // A nova tarefa sempre começa na posição 1
+    };
+
+    // Atualizar as posições das tarefas existentes
+    const updatedTasks = [
+      newTask,
+      ...tasks.map(task => ({ ...task, position: task.position + 1 }))
+    ];
+
+    setTasks(updatedTasks); // Adiciona a nova tarefa e atualiza as posições
+    closeModal(); // Fecha o modal após adicionar a tarefa
+  };
+
   return (
     <div id='TasksList'>
       <div className='controls flex justify-between items-center'>
-        <button>+ Nova tarefa</button>
+        <button onClick={openModal}>+ Nova tarefa</button>
         <TaskStateChart tasks={tasks} />
       </div>
       <ul className='scrollable-container'>
@@ -80,7 +108,7 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              <div className='cardTask' onClick={() => openModal(task)}>
+              <div className='cardTask'>
                 <div>
                   <h1>{task.name}</h1>
                   <p>{task.description}</p>
@@ -94,14 +122,16 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
               />
 
               <div className='task-controls'>
-                <button onClick={() => moveUp(index)} disabled={index === 0}>
+                <button id='MovUp' onClick={() => moveUp(index)} disabled={index === 0}>
                   <FaChevronUp />
                 </button>
-                <button
-                  onClick={() => moveDown(index)}
-                  disabled={index === tasks.length - 1}
-                >
+                <button id='MovDown' onClick={() => moveDown(index)} disabled={index === tasks.length - 1}>
                   <FaChevronDown />
+                </button>
+
+                {/* Botão Deletar */}
+                <button id='DeleteTask' className='ml-1' onClick={() => deleteTask(task.id)}>
+                  <FaTrash /> {/* Ícone de lixeira */}
                 </button>
               </div>
             </motion.li>
@@ -109,10 +139,30 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
         </AnimatePresence>
       </ul>
 
-      {/* Modal */}
-      {selectedTask && (
-        <div className="modal">
-          {/* Exibir informações da tarefa selecionada */}
+      {/* Modal para adicionar uma nova tarefa */}
+      {isModalOpen && (
+        <div id="ModalNewTask" className="modal-overlay">
+          <div className="modal-content">
+            <h2>Criar Nova Tarefa</h2>
+
+            <input
+              type="text"
+              placeholder="Nome da tarefa"
+              value={newTaskName}
+              onChange={(e) => setNewTaskName(e.target.value)}
+            />
+
+            <textarea
+              placeholder="Descrição da tarefa"
+              value={newTaskDescription}
+              onChange={(e) => setNewTaskDescription(e.target.value)}
+            />
+
+            <div className="modal-actions">
+              <button onClick={addNewTask}>Adicionar Tarefa</button>
+              <button onClick={closeModal}>Cancelar</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

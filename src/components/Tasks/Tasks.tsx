@@ -3,7 +3,6 @@ import '../../styles/components/scope/Tasks.scss';
 import { FlowBoard } from './FlowBoard';
 import { TasksList } from './TasksList';
 
-
 type Task = {
   id: number;
   name: string;
@@ -13,7 +12,17 @@ type Task = {
 };
 
 export function Tasks() {
-  // Dados fictícios 
+  const loadTasksFromLocalStorage = (): Task[] => {
+    const storedTasks = localStorage.getItem('tasks');
+    return storedTasks ? JSON.parse(storedTasks) : []; // Se não houver tarefas no localStorage, retorna [ ]
+  };
+
+  // Função para salvar as tarefas no localStorage
+  const saveTasksToLocalStorage = (tasks: Task[]) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
+
+  // Dados fictícios para a primeira execução
   const initialTasks: Task[] = [
     { id: 1, name: 'Task One', description: 'Description for Task One', state: 'to do', position: 1 },
     { id: 2, name: 'Task Two', description: 'Description for Task Two', state: 'doing', position: 2 },
@@ -23,16 +32,19 @@ export function Tasks() {
     { id: 6, name: 'Task Six', description: 'Description for Task Six', state: 'done', position: 6 },
   ];
 
-  const [tasks, setTasks] = useState(initialTasks);
+  // armazenar as tarefas
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const storedTasks = loadTasksFromLocalStorage();
+    return storedTasks.length ? storedTasks : initialTasks; // Usa as tarefas do localStorage, se existirem
+  });
+
   const [refreshKey, setRefreshKey] = useState(0); // Estado para controlar a re-renderização
 
-  // monitorar alterações na lista de tarefas
+  // monitoria da lista de tarefas e salvar no localStorage
   useEffect(() => {
-    console.log('As tarefas foram atualizadas:', tasks);
-
-    // Atualiza a chave de renderização sempre que as tarefas mudarem
-    setRefreshKey(prevKey => prevKey + 1);
-  }, [tasks]); // Este useEffect dispara sempre que o array 'tasks' mudar
+    saveTasksToLocalStorage(tasks); // salvar as tarefas sempre que o array mudar
+    setRefreshKey(prevKey => prevKey + 1); // Atualizar a chave de renderização
+  }, [tasks]);
 
   return (
     <div id="Tasks">

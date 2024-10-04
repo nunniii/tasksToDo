@@ -11,7 +11,7 @@
 
     padding: .5rem;
 
-    width: 40vw;
+    // width: 40vw;
     height: calc(100vh - 3rem);
 
     ul{
@@ -26,7 +26,7 @@
             background-color: white;
             box-shadow: 0 0 2px rgba(black, .1);
             border-radius: .5rem;
-            width: 40vw;
+            
             align-items: center;
             padding: 0 1rem;
 
@@ -43,7 +43,6 @@
     
     
     display: flex;
-    gap: 1rem;
     justify-content: space-between;
     align-items: center;
 
@@ -66,25 +65,61 @@
     }
 }
 
-.task-controls{
+
+
+
+
+
+
+.task-controls {
     display: flex;
     margin: 0 .5rem 0 .5rem;
     align-items: center;
+  
+    button {
+      background-color: whitesmoke;
+      padding: .2rem;
 
-    button{
-        padding: 0;
-        margin: 0;
+      height: 1.5rem;
+      
+      
+      
+      cursor: pointer;
+      color: gray; 
+      font-size: .8rem; 
+      
+      &:hover {
+          color: gainsboro; 
+        }
     }
-}
+    #MovDown{
+        border-radius: 0 .25rem .25rem 0;
+        border-top: 1px solid rgba(black, .3);
+        border-bottom: 1px solid rgba(black, .3);
+        border-right: 1px solid rgba(black, .3);
+        border-left: none;
 
-
-
+    }
+    
+    #MovUp{
+        border-radius: .25rem 0 0 .25rem;
+        border-top: 1px solid rgba(black, .3);
+        border-bottom: 1px solid rgba(black, .3);
+        border-left: 1px solid rgba(black, .3);
+        border-right: none;
+    }
+  }
+  
+  
+  
 .controls{
     button{
         background-color: aqua;
         padding: .5rem;
         border-radius: .5rem;
     }
+
+    
     
 }
 

@@ -29,9 +29,9 @@ export function FlowBoard({ tasks, setTasks }: FlowBoardProps) {
   const initialNodes: Node[] = [];
 
   const taskStateColors: Record<'to do' | 'doing' | 'done', string> = {
-    'to do': '#FF0000',
-    'doing': '#0000FF',
-    'done': '#00FF00',
+    'to do': '#EB3A1C',
+    'doing': '#4D84EB',
+    'done': '#B7EB42',
   };
 
   // Definir a cor com base no estado da tarefa
