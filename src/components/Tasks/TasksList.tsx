@@ -84,7 +84,7 @@ export function TasksList({ tasks, setTasks }: TasksListProps) {
     // Atualizar as posições das tarefas existentes
     const updatedTasks = [
       newTask,
-      ...tasks.map(task => ({ ...task, position: task.position + 1 }))
+      ...tasks.map(task => ({ ...task, position: task.position + 1 })) // Atualiza a posição das tarefas
     ];
 
     setTasks(updatedTasks); // Adiciona a nova tarefa e atualiza as posições

@@ -4,13 +4,13 @@ import { useState } from "react";
 import useDeviceDimensions from './hooks/useDeviceDimensions';
 
 function App() {
-  // para gerenciar o estado do componente selecionado
-  const [selectedComponent, setSelectedComponent] = useState<string>('Tasks');
+  // Para gerenciar o estado do componente selecionado
+  const [selectedComponent, setSelectedComponent] = useState<'Tasks' | 'Progress' | 'Rest'>('Tasks');
 
-  // verifica se o dispositivo é celular ou tablet em modo vertical
+  // Verifica se o dispositivo é celular ou tablet em modo vertical
   const isMobileOrTabletPortrait = useDeviceDimensions();
 
-  // componente de aviso
+  // Componente de aviso
   const WarningComponent = () => (
     <div style={{ padding: '20px', textAlign: 'center', background: '#ffdddd' }}>
       <h2>Aviso!</h2>

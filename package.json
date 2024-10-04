@@ -7,12 +7,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "antiBugs": "npm i @headlessui/react",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run dev",
+    "predeploy": "npm run antiBugs && npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.9",
     "@heroicons/react": "^2.1.5",
     "@xyflow/react": "^12.3.1",
     "d3": "^7.9.0",

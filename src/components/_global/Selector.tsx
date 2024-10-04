@@ -7,7 +7,7 @@ import { useState } from 'react'
 type Option = {
   id: number;
   name: string;
-  component: string;
+  component: 'Tasks' | 'Progress' | 'Rest'; // Mudando o tipo aqui
 };
 
 // Atualizando as opções com o tipo 'Option'
@@ -18,16 +18,16 @@ const options: Option[] = [
 ];
 
 // Definindo o tipo da prop 'onSelect' para garantir que o TypeScript o reconheça corretamente
-interface SelectorProps {
-  onSelect: (component: string) => void;
-}
+type SelectorProps = {
+  onSelect: (component: 'Tasks' | 'Progress' | 'Rest') => void; // O tipo aqui deve ser o mesmo
+};
 
 export function Selector({ onSelect }: SelectorProps) {
   const [selected, setSelected] = useState<Option>(options[0]);
 
   const handleChange = (option: Option) => {
     setSelected(option);
-    onSelect(option.component);  // Notifica o componente pai sobre a mudança
+    onSelect(option.component);  // Agora isso é seguro
   }
 
   return (

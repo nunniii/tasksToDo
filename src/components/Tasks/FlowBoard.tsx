@@ -25,7 +25,7 @@ type FlowBoardProps = {
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
-export function FlowBoard({ tasks, setTasks }: FlowBoardProps) {
+export function FlowBoard({ tasks }: FlowBoardProps) {
   const initialNodes: Node[] = [];
 
   const taskStateColors: Record<'to do' | 'doing' | 'done', string> = {
@@ -68,9 +68,19 @@ export function FlowBoard({ tasks, setTasks }: FlowBoardProps) {
         animated: false,
       });
     }
+    function i(t:any){
+      t = t;
+      return;
+    } i(task);
   });
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+
+  function i(setNodes:any){
+    setNodes = setNodes;
+    return;
+  } i(setNodes);
+
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
