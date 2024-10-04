@@ -1,7 +1,9 @@
 
 ![GitHub License](https://img.shields.io/github/license/nunniii/tasksToDo) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-# TasksToDo
+<div align="center">
+  <h1>TasksToDo</h1>
+</div>
 
 [TasksToDo](https://nunniii.github.io/tasksToDo/) is an application that allows you to manage your tasks by classifying them into "to do" 📝, "in progress" ⏳, and "done" ✅. The application utilizes several key dependencies to enhance its functionality and user experience. The library @xyflow/react is integrated to provide a dynamic flow board for visual task management, allowing users to quickly see the progress of their tasks. The project is built with React and TypeScript, and for styling, the implementation primarily uses SCSS and Tailwind 🌟.
 
@@ -51,3 +53,14 @@ export default tseslint.config({
   },
 })
 ```
+
+
+
+</hr>
+
+<div align="center">
+  <p>Made with ❤️ by a student</p>
+</div>
+
+
+
