@@ -1,11 +1,9 @@
 import '../../styles/components/Nav.scss';
 import { Selector } from './Selector';
 
+import Pomodoro from '../Pomodoro';
 
-// Definir o tipo das props do Nav
-// interface NavProps {
-//   onSelect: (component: string) => void;  // Tipagem da função onSelect
-// }
+
 
 type NavProps = {
   onSelect: (component: 'Tasks' | 'Progress' | 'Rest') => void; // Tipo ajustado para aceitar apenas esses três valores
@@ -19,6 +17,7 @@ export function Nav({ onSelect }: NavProps) {
         {/* O seletor recebe a função onSelect para atualizar a seleção */}
         <Selector onSelect={onSelect} />
       </div>
+        <Pomodoro />
     </nav>
   );
 }
